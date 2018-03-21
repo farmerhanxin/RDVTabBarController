@@ -24,6 +24,9 @@
 #import "RDVTabBar.h"
 #import "RDVTabBarItem.h"
 
+
+#define IPhoneX [UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO
+
 @interface RDVTabBar ()
 
 @property (nonatomic) CGFloat itemWidth;
@@ -122,6 +125,7 @@
         CGFloat itemHeight = [item itemHeight];
         if (itemHeight && (itemHeight < minimumTabBarContentHeight)) {
             minimumTabBarContentHeight = itemHeight;
+            if(IPhoneX)minimumTabBarContentHeight += 17;// 34/2
         }
     }
     

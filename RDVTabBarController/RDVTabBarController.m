@@ -25,6 +25,8 @@
 #import "RDVTabBarItem.h"
 #import <objc/runtime.h>
 
+#define IsIphoneX [UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO
+
 @interface UIViewController (RDVTabBarControllerItemInternal)
 
 - (void)rdv_setTabBarController:(RDVTabBarController *)tabBarController;
@@ -190,6 +192,15 @@
     return _contentView;
 }
 
+
+NS_INLINE CGFloat ajustBottomEdgeOnIphoneX(CGFloat bottomHeight){
+    if (IsIphoneX) {
+        bottomHeight += 34;
+    }
+    return bottomHeight;
+}
+
+
 - (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated {
     _tabBarHidden = hidden;
     
@@ -202,7 +213,7 @@
         CGFloat tabBarHeight = CGRectGetHeight([[weakSelf tabBar] frame]);
         
         if (!tabBarHeight) {
-            tabBarHeight = 49;
+            tabBarHeight = ajustBottomEdgeOnIphoneX(49);;
         }
         
         if (!weakSelf.tabBarHidden) {
