@@ -67,7 +67,12 @@
     CGSize frameSize = self.frame.size;
     CGFloat minimumContentHeight = [self minimumContentHeight];
     
-    [[self backgroundView] setFrame:CGRectMake(0, frameSize.height - minimumContentHeight,
+    CGFloat bgY = frameSize.height - minimumContentHeight;
+    if(IPhoneX){
+        bgY = 0;
+    }
+    
+    [[self backgroundView] setFrame:CGRectMake(0, bgY,
                                             frameSize.width, frameSize.height)];
     
     [self setItemWidth:roundf((frameSize.width - [self contentEdgeInsets].left -
