@@ -125,7 +125,6 @@
         CGFloat itemHeight = [item itemHeight];
         if (itemHeight && (itemHeight < minimumTabBarContentHeight)) {
             minimumTabBarContentHeight = itemHeight;
-            if(IPhoneX)minimumTabBarContentHeight += 17;// 34/2
         }
     }
     
